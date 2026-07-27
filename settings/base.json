@@ -1,0 +1,61 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_TEAMMATE_MODE": "tmux"
+  },
+  "permissions": {
+    "defaultMode": "auto",
+    "allow": [
+      "Bash(claude --version:*)",
+      "Bash(claude mcp list:*)",
+      "Bash(column:*)",
+      "Bash(cut:*)",
+      "Bash(date:*)",
+      "Bash(diff:*)",
+      "Bash(du:*)",
+      "Bash(fd:*)",
+      "Bash(file:*)",
+      "Bash(git branch:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git remote:*)",
+      "Bash(git show:*)",
+      "Bash(git status:*)",
+      "Bash(grep:*)",
+      "Bash(jq:*)",
+      "Bash(pdftotext:*)",
+      "Bash(pwd:*)",
+      "Bash(rg:*)",
+      "Bash(sort:*)",
+      "Bash(tree:*)",
+      "Bash(uniq:*)",
+      "Bash(wc:*)",
+      "Bash(which:*)",
+      "WebSearch"
+    ]
+  },
+  "outputStyle": "Explanatory",
+  "statusLine": {
+    "type": "command",
+    "command": "python3 -c 'import json,sys;d=json.load(sys.stdin);c=(d.get(\"cost\") or {}).get(\"total_cost_usd\") or 0;u=(d.get(\"context_window\") or {}).get(\"used_percentage\");h=\"%.1f%%\"%u if u is not None else \"--\";sys.stdout.write(\"Context: %s | $%.2f | %s | %s\"%(h,c,(d.get(\"model\") or {}).get(\"display_name\",\"\"),(d.get(\"workspace\") or {}).get(\"current_dir\",\"\")))'"
+  },
+  "extraKnownMarketplaces": {
+    "claude-playground": {
+      "source": {
+        "source": "github",
+        "repo": "winsthuang/claude-playground"
+      }
+    },
+    "hazel-skills": {
+      "source": {
+        "source": "github",
+        "repo": "winsthuang/hazel-skills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "winston-output-styles@claude-playground": true,
+    "de-ai-ify@hazel-skills": true,
+    "slack-respond@hazel-skills": true
+  }
+}
