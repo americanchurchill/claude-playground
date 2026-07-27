@@ -58,13 +58,16 @@ def merge(base: dict, cur: dict, force: bool) -> tuple[dict, list[str], list[str
             cur_map.update(added)
             changes.append(f"{label}: {', '.join(sorted(added))}")
 
-    if base.get("statusLine"):
-        if not out.get("statusLine") or force:
-            if out.get("statusLine") != base["statusLine"]:
-                out["statusLine"] = base["statusLine"]
-                changes.append("statusLine set")
-        elif out["statusLine"] != base["statusLine"]:
-            skipped.append("statusLine: kept existing (use --force to replace)")
+    # Top-level values that represent a deliberate local choice.
+    for key in ("statusLine", "outputStyle"):
+        if not base.get(key):
+            continue
+        if not out.get(key) or force:
+            if out.get(key) != base[key]:
+                out[key] = base[key]
+                changes.append(f"{key} set")
+        elif out[key] != base[key]:
+            skipped.append(f"{key}: kept existing (use --force to replace)")
 
     return out, changes, skipped
 
