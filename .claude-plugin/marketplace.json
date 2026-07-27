@@ -1,0 +1,18 @@
+{
+  "name": "claude-playground",
+  "owner": {
+    "name": "Winston Huang"
+  },
+  "metadata": {
+    "description": "Personal Claude Code config that travels between machines",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "winston-output-styles",
+      "source": "./plugins/winston-output-styles",
+      "description": "Personal output styles: ELI5",
+      "category": "productivity"
+    }
+  ]
+}
