@@ -14,10 +14,8 @@
       "Bash(date:*)",
       "Bash(diff:*)",
       "Bash(du:*)",
-      "Bash(env:*)",
       "Bash(fd:*)",
       "Bash(file:*)",
-      "Bash(find:*)",
       "Bash(git branch:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
@@ -33,9 +31,7 @@
       "Bash(pdftotext:*)",
       "Bash(pwd:*)",
       "Bash(rg:*)",
-      "Bash(sleep:*)",
       "Bash(sort:*)",
-      "Bash(sqlite3:*)",
       "Bash(tail:*)",
       "Bash(tree:*)",
       "Bash(uniq:*)",
@@ -46,36 +42,29 @@
     ]
   },
   "skillOverrides": {
-    "JA-update": "off",
-    "code-review": "off",
-    "competitive-analysis": "off",
-    "data-context-extractor": "off",
-    "data-exploration": "off",
-    "data-validation": "off",
-    "data-visualization": "off",
-    "documentation": "off",
-    "feature-spec": "off",
-    "financial-statements": "off",
-    "interactive-dashboard-builder": "off",
-    "meeting-followup": "off",
-    "metrics-tracking": "off",
-    "roadmap-management": "off",
-    "sigma-dashboard": "off",
-    "spawn-team": "off",
-    "sql-queries": "off",
-    "stakeholder-comms": "off",
-    "tech-debt": "off",
-    "testing-strategy": "off",
-    "trades": "off",
-    "tufte": "off",
-    "update-manual-okrs": "off",
-    "update-sprints": "off",
-    "user-research-synthesis": "off",
-    "variance-analysis": "off",
-    "verified-snowflake": "off"
+    "code-review": "off"
   },
   "statusLine": {
     "type": "command",
     "command": "input=$(cat); dir=$(echo \"$input\" | jq -r '.workspace.current_dir'); model=$(echo \"$input\" | jq -r '.model.display_name'); cost=$(echo \"$input\" | jq -r '.cost.total_cost_usd // 0'); used=$(echo \"$input\" | jq -r '.context_window.used_percentage // empty'); [ -n \"$used\" ] && printf \"Context: %.1f%% | $%.2f | %s | %s\" \"$used\" \"$cost\" \"$model\" \"$dir\" || printf \"Context: -- | $%.2f | %s | %s\" \"$cost\" \"$model\" \"$dir\""
+  },
+  "extraKnownMarketplaces": {
+    "claude-playground": {
+      "source": {
+        "source": "github",
+        "repo": "winsthuang/claude-playground"
+      }
+    },
+    "hazel-skills": {
+      "source": {
+        "source": "github",
+        "repo": "winsthuang/hazel-skills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "winston-output-styles@claude-playground": true,
+    "de-ai-ify@hazel-skills": true,
+    "slack-respond@hazel-skills": true
   }
 }

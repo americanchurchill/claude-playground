@@ -31,8 +31,37 @@ Pull later changes with `/plugin marketplace update claude-playground`.
 | Component | Contents |
 | --- | --- |
 | `plugins/winston-output-styles` | `ELI5` — short sentences, no jargon, 2 options max when a decision is needed |
-| `settings/base.json` | 37 read-only Bash permissions, 27 `skillOverrides`, `statusLine`, `env` |
+| `settings/base.json` | 33 read-only Bash permissions, `statusLine`, `env`, marketplaces + enabled plugins |
 | `settings/apply.py` | Idempotent merge into `~/.claude/settings.json` |
+
+`base.json` also registers the marketplaces and enables plugins, so a new machine
+comes up with `ELI5`, `de-ai-ify` and `slack-respond` without running any
+`/plugin` commands by hand.
+
+### What is deliberately *not* synced
+
+**Four permissions were dropped from the allowlist.** `env`, `find` and `sqlite3`
+all execute arbitrary commands — `env <cmd>`, `find -exec`, and sqlite3's
+`.shell` dot-command — so an allowlist containing them is not read-only, it is
+silent arbitrary execution that never prompts again. `sleep` went too: the
+harness blocks foreground `sleep` anyway. Add them back if you want them; the
+principle here is that the allowlist holds only what cannot execute code.
+
+**26 of the 27 `skillOverrides` were dropped.** They suppress skills that exist
+only as local directories on one laptop, so on a fresh machine there is nothing
+to suppress. `code-review` is the exception — it is built into the CLI, so that
+override is load-bearing everywhere and is kept.
+
+### External dependencies
+
+- `statusLine` shells out to **`jq`**. Without it the status line silently breaks.
+- `CLAUDE_CODE_TEAMMATE_MODE=tmux` needs **`tmux`** installed.
+- `permissions.defaultMode: auto` is carried over. A fresh machine will start in
+  auto-approve mode — deliberate, but worth knowing before running this on a
+  machine you trust less than your laptop.
+- `slack-respond` reads its voice guide from an iCloud path under
+  `~/Library/Mobile Documents/…/Claude Code/Slack/CLAUDE.md`. It degrades to
+  generic defaults with a warning if that file is absent.
 
 ### Why settings need their own script
 

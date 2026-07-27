@@ -46,12 +46,17 @@ def merge(base: dict, cur: dict, force: bool) -> tuple[dict, list[str], list[str
         elif cur_val != val:
             skipped.append(f"permissions.{key}: kept {cur_val!r} (repo has {val!r})")
 
-    if base.get("skillOverrides"):
-        cur_so = out.setdefault("skillOverrides", {})
-        added = {k: v for k, v in base["skillOverrides"].items() if cur_so.get(k) != v}
+    # Plain additive maps: repo wins per-key, local-only keys survive.
+    for section, label in (("skillOverrides", "skillOverrides"),
+                           ("extraKnownMarketplaces", "marketplaces"),
+                           ("enabledPlugins", "plugins")):
+        if not base.get(section):
+            continue
+        cur_map = out.setdefault(section, {})
+        added = {k: v for k, v in base[section].items() if cur_map.get(k) != v}
         if added:
-            cur_so.update(added)
-            changes.append(f"skillOverrides: {len(added)} updated")
+            cur_map.update(added)
+            changes.append(f"{label}: {', '.join(sorted(added))}")
 
     if base.get("statusLine"):
         if not out.get("statusLine") or force:
