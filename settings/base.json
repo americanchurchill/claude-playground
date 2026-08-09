@@ -55,6 +55,7 @@
   },
   "enabledPlugins": {
     "winston-output-styles@claude-playground": true,
+    "winston-skills@claude-playground": true,
     "de-ai-ify@hazel-skills": true,
     "slack-respond@hazel-skills": true
   }

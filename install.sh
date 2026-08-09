@@ -24,10 +24,11 @@ python3 settings/apply.py $DRY $FORCE
 
 cat <<'EOF'
 
-==> Output styles ship as a plugin. Run these inside Claude Code:
+==> Output styles and skills ship as plugins. Run these inside Claude Code:
 
     /plugin marketplace add winsthuang/claude-playground
     /plugin install winston-output-styles@claude-playground
+    /plugin install winston-skills@claude-playground
 
     Then: /config -> Output style, or /output-style ELI5
     Later updates: /plugin marketplace update claude-playground

@@ -21,6 +21,7 @@ Then inside Claude Code:
 ```
 /plugin marketplace add winsthuang/claude-playground
 /plugin install winston-output-styles@claude-playground
+/plugin install winston-skills@claude-playground
 ```
 
 Pick the style with `/config` → Output style, or `/output-style ELI5`.
@@ -31,12 +32,13 @@ Pull later changes with `/plugin marketplace update claude-playground`.
 | Component | Contents |
 | --- | --- |
 | `plugins/winston-output-styles` | `ELI5` — short sentences, no jargon, 2 options max when a decision is needed |
+| `plugins/winston-skills` | `/ste100` — ASD-STE100 Simplified Technical English: session mode toggle or one-shot rewrite |
 | `settings/base.json` | 26 read-only Bash permissions, `statusLine`, `outputStyle`, `env`, marketplaces + enabled plugins |
 | `settings/apply.py` | Idempotent merge into `~/.claude/settings.json` |
 
 `base.json` also registers the marketplaces and enables plugins, so a new machine
-comes up with `ELI5`, `de-ai-ify` and `slack-respond` without running any
-`/plugin` commands by hand.
+comes up with `ELI5`, `/ste100`, `de-ai-ify` and `slack-respond` without running
+any `/plugin` commands by hand.
 
 ### What is deliberately *not* synced
 

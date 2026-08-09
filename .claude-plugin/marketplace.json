@@ -13,6 +13,12 @@
       "source": "./plugins/winston-output-styles",
       "description": "Personal output styles: ELI5",
       "category": "productivity"
+    },
+    {
+      "name": "winston-skills",
+      "source": "./plugins/winston-skills",
+      "description": "Personal skills: ste100 (Simplified Technical English)",
+      "category": "productivity"
     }
   ]
 }
